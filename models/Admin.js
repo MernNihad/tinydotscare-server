@@ -1,21 +1,63 @@
 import mongoose from 'mongoose';
 
-// Define the schema for a blog post
-const postSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     name: {
+        type: String,
+    },
+    email: {
         type: String,
     },
     password: {
         type: String,
-        required: true
+    }, 
+    age: {
+        type: Number,
     },
-    email: {
+    number: {
         type: String,
-        required: true
-    }
-}, {
-    timestamps: true // Add createdAt and updatedAt fields
+    },
+    gender: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
+    houseName: {
+        type: String,
+    },
+    place: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    state:{
+        type:String,
+    },
+    qualification:{
+        type:String,
+    },
+    isAdmin:{
+        type:Boolean,
+        default:true
+    },
+
 });
 
-// Define a model using the schema
-export const Post = mongoose.model('Post', postSchema);
+export const Admin = mongoose.model('Admin', Schema);
+
+
+
+//  "password":""
+// "name": "",
+// "age" : "",
+// "email": "",
+// "phoneNumber": "",
+// "gender" : "",
+// "photo": "",
+// "houseName": "",
+// "place":  "",
+// "city":  "",
+// "state" : "",
+// "qualification" : "",
+// "isTeacher": true

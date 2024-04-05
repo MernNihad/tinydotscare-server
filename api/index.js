@@ -28,13 +28,7 @@ import {
     deleteDoctor
 } from './controllers/doctorController.js';
 
-import {
-    createAdmin,
-    getAllAdmins,
-    getAdminById,
-    updateAdmin,
-    deleteAdmin
-} from './controllers/adminController.js';
+import {createAdmin,getAllAdmins,getAdminById,updateAdmin,deleteAdmin } from './controllers/adminController.js';
 
 import {
     createParent,
@@ -63,12 +57,6 @@ router.get('/api/doctors/:id', getDoctorById);
 router.put('/api/doctors/:id', updateDoctor);
 router.delete('/api/doctors/:id', deleteDoctor);
 
-// Admin Module Routes
-router.post('/api/admins', createAdmin);
-router.get('/api/admins', getAllAdmins);
-router.get('/api/admins/:id', getAdminById);
-router.put('/api/admins/:id', updateAdmin);
-router.delete('/api/admins/:id', deleteAdmin);
 
 // Parents Module Routes
 router.post('/api/parents', createParent);

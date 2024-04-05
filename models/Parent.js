@@ -37,7 +37,7 @@ const Schema = new mongoose.Schema({
     qualification:{
         type:String,
     },
-    isDoctor:{
+    isParent:{
         type:Boolean,
         default:true
     },
@@ -48,7 +48,7 @@ const Schema = new mongoose.Schema({
 
 });
 
-export const Doctor = mongoose.model('Doctor', Schema);
+export const Parent = mongoose.model('Parent', Schema);
 
 
 

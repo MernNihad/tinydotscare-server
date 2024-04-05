@@ -3,20 +3,23 @@ import mongoose from 'mongoose';
 
 // Define the schema for activities
 const activitySchema = new mongoose.Schema({
-    date: {
-        type: Date,
+    UserType: {
+        type: String,
     },
     childrenId: {
         type: mongoose.Types.ObjectId,
     },
+    status: {
+        type: String,
+    },
+    date: {
+        type: Date,
+    },
     assignedBy: {
         type: mongoose.Types.ObjectId,
     },
-    activityDetails: {
-        type: String,
-    }
 });
 
 // Define a model using the schema
-export const Activity = mongoose.model('Activity', activitySchema);
+export const Attendance = mongoose.model('Attendance', activitySchema);
 
