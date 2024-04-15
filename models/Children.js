@@ -51,6 +51,9 @@ const childrenSchema = new mongoose.Schema({
         type:Boolean,
         default:true
     },
+    amount:{
+        type:String,
+    },
 }, {
     timestamps: true 
 });

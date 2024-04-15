@@ -29,6 +29,16 @@ export const loginParent = async (req, res) => {
 };
 
 
+export const getAllParentsAll = async (req, res) => {
+    try {
+            const parent = await Parent.find({isStatus:true});
+            return res.json({result:parent})
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export const getAllParents = async (req, res) => {
     try {
         if(req.user.isAdmin){

@@ -1,25 +1,25 @@
 // Import mongoose
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // Define the schema for consultation details
 const consultationSchema = new mongoose.Schema({
-    consultation_id: {
-        type: Number,
-        required: true,
-        unique: true // Primary key constraint
-    },
-    date: {
-        type: Date,
-        required: true
-    },
-    childId: {
-        type: String,
-        required: true
-    }
+  message: {
+    type: String,
+  },
+  childId: {
+    type: mongoose.Types.ObjectId,
+  },
+  doctorId: {
+    type: mongoose.Types.ObjectId,
+  },
+  status: {
+    type: String,
+    default:'schduled'
+  },
 });
 
 // Define a model using the schema
-const Consultation = mongoose.model('Consultation', consultationSchema);
+const Consultation = mongoose.model("Consultation", consultationSchema);
 
 // Export the model
 export default Consultation;

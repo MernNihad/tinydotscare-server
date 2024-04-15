@@ -134,6 +134,8 @@ export const verifyingAllUsersToken = (req,res,next)=>{
 
     const token = header.split(" ")[1]
     jwt.verify(token,'privateKey123', async(err, user) => {
+
+        console.log(user,'user');
         if (err) {
             return res.status(403).send( err?.message || 'Invalid token');
         }
@@ -156,6 +158,7 @@ export const verifyingAllUsersToken = (req,res,next)=>{
         }
         else if(user.isTeacher){
             const isExist = await Teacher.findById(user.id)
+            console.log(isExist)
             if(!isExist.isStatus) return res.status(400).json({message:"Your request is pending..."})
             req.user = isExist
             next();

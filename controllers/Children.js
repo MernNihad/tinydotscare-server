@@ -2,10 +2,16 @@ import mongoose from 'mongoose';
 import {Children} from '../models/Children.js';
 import jwt from "jsonwebtoken";
 import { Attendance } from '../models/Attendance.js';
+import Consultation from '../models/Consultation.js';
+import { HealthRecord } from '../models/HealthRecords.js';
+import Fees from '../models/Fees.js';
 
 export const registerChildren = async (req, res) => {
     try {
         if(!req.params.id) return res.status(400).json({message:"Id not provided"})
+
+
+
         const newChildren = new Children({parent_Id:req.params.id,...req.body});
         const savedChildren = await newChildren.save();
         res.status(201).json({result:savedChildren,message:'Successfully created'});
@@ -14,6 +20,18 @@ export const registerChildren = async (req, res) => {
     }
 };
 
+export const addDescription = async (req, res) => {
+    try {
+        const healthRecord = new HealthRecord(req.body);
+
+        const newCOnsult = await Consultation.findByIdAndUpdate(req.body.consultantId,{$set:{status:"complited"}})
+
+        const savedHealthRecord = await healthRecord.save();
+        res.status(201).json({result:savedHealthRecord,message:'Successfully created'});
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
 export const getChildrenByParentId = async (req, res) => {
     try {
@@ -26,6 +44,18 @@ export const getChildrenByParentId = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+export const getAllChildrensAll = async (req, res) => {
+    try {
+
+
+        const childrens = await Children.find();
+
+        return res.json({result:childrens});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 
 // export const loginChildren = async (req, res) => {
 //     try {
@@ -56,6 +86,60 @@ export const getAllChildrens = async (req, res) => {
 };
 
 
+
+
+export const getChildrensSchedulesById = async (req, res) => {
+    try { 
+        const childrens = await Consultation.find({childId:new mongoose.Types.ObjectId(req.params.id)})
+        return res.status(200).json({ result : childrens });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getallschedules = async (req, res) => {
+    try { 
+        const consultations = await Consultation.aggregate(
+            [
+                {
+                    $lookup:{
+                        from:"childrens",
+                        localField:"childId",
+                        foreignField:"_id",
+                        as:"childrensInfo"
+                    }
+                }
+            ]
+        )
+        // console.log('----')
+        // const consultations = await Consultation.find()
+
+        return res.status(200).json({ result : consultations });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getAllChildrensWithoutCredentials = async (req, res) => {
+    try { 
+        const childrens = await Children.find({isStatus:true})
+        return res.status(200).json({ result : childrens });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+export const getSchedules = async (req, res) => {
+    try { 
+            const consultations = await Consultation.find();
+            return res.status(200).json({ result : consultations });
+
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 export const getAllChildrensByAdmin = async (req, res) => {
     try { 
             const newChildren = await Children.aggregate([

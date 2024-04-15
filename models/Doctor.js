@@ -44,6 +44,9 @@ const Schema = new mongoose.Schema({
     isStatus:{
         type:Boolean,
         default:false
+    },
+    bankInfoId:{
+        type:mongoose.Types.ObjectId
     }
 
 });
