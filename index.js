@@ -14,7 +14,7 @@ import { sentMessage,getMessages,sentDoctorMessage,getDoctorMessage,getHealthRec
 const app = express();
 const PORT = 3000;
 
-mongoose.connect('mongodb://127.0.0.1:27017/n').then((response)=>{
+mongoose.connect('mongodb://127.0.0.1:27017/tinydots').then((response)=>{
     console.log(`databse connected on host : ${response.connection.host}`);
 })
 
